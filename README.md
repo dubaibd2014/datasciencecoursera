@@ -1,5 +1,5 @@
-#1.Merges the training and the test sets to create one data set.
-# Reading table into R and Forming a large dataset
+Merges the training and the test sets to create one data set.
+Reading table into R and Forming a large dataset.
 
 x_train<-read.table("X_train.txt")
 y_train<-read.table("y_train.txt")
@@ -15,14 +15,16 @@ merge_test<-cbind(y_test,subject_test,x_test)
 data<-rbind(merge_train,merge_test)
 
 
-# Appropriately labels the data set with descriptive activity names. 
+Appropriately labels the data set with descriptive activity names. 
+
 features<-read.table("features.txt")
 col.f<-as.vector(features[,2])
 colname<-c("activity","subject",col.f)
 colnames(data)<-colname
 
 
-# Uses descriptive activity names to name the activities in the data set.
+Uses descriptive activity names to name the activities in the data set.
+
 activity_labels<-read.table("activity_labels.txt")
 act_label<-rep(NA,10299)
 for (i in 1:10299){
@@ -40,7 +42,8 @@ act_label
 data_final_1<-cbind(as.data.frame(act_label),data)
 
 
-# Extracts only the measurements on the mean and standard deviation for each measurement. 
+Extracts only the measurements on the mean and standard deviation for each measurement. 
+
 a<-grep("(mean|std)\\(\\)",features[,2])
 a
 length(a)
