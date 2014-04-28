@@ -1,6 +1,4 @@
-Merges the training and the test sets to create one data set.
-Reading table into R and Forming a large dataset.
-
+1.Merges the training and the test sets to create one data set.Reading table into R and Forming a large dataset.
 
 x_train<-read.table("X_train.txt")
 y_train<-read.table("y_train.txt")
@@ -16,7 +14,7 @@ merge_test<-cbind(y_test,subject_test,x_test)
 data<-rbind(merge_train,merge_test)
 
 
-Appropriately labels the data set with descriptive activity names. 
+2.Appropriately labels the data set with descriptive activity names. 
 
 features<-read.table("features.txt")
 col.f<-as.vector(features[,2])
@@ -24,8 +22,7 @@ colname<-c("activity","subject",col.f)
 colnames(data)<-colname
 
 
-Uses descriptive activity names to name the activities in the data set.
-
+3.Uses descriptive activity names to name the activities in the data set.
 
 activity_labels<-read.table("activity_labels.txt")
 act_label<-rep(NA,10299)
@@ -44,8 +41,7 @@ act_label
 data_final_1<-cbind(as.data.frame(act_label),data)
 
 
-Extracts only the measurements on the mean and standard deviation for each measurement. 
-
+4.Extracts only the measurements on the mean and standard deviation for each measurement. 
 
 a<-grep("(mean|std)\\(\\)",features[,2])
 a
@@ -55,9 +51,8 @@ b<-a+3
 data_extra<-data_final_1[,c(1,2,3,b)]
 write.table(data_extra,"data_extra.txt")
 
-Creates a second, independent tidy data set with the average of 
-each variable for each activity and each subject. 
 
+5.Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
 data_s<-split(data_final_1,list(data_final_1[,3],data_final_1[,2]))
 data_final_2<-as.data.frame(t(sapply(data_s, function(x) colMeans(x[,col.f]))))
